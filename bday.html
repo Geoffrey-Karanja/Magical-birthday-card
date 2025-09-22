@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="bday.css">
+<title>Magical Birthday!</title>
+</head>
+<body>
+
+<div class="card">
+    <div class="confetti-container" id="confettiContainer"></div>
+    <div class="floating-hearts" id="heartsContainer"></div>
+
+    <div class="card-content">
+        <div>
+            <svg class="birthday-icon" width="80" height="80" viewBox="0 0 100 100">
+                <rect x="20" y="60" width="60" height="30" fill="#8B4513" rx="5"/>
+                <rect x="25" y="50" width="50" height="15" fill="#FFB6C1" rx="3"/>
+                <rect x="30" y="40" width="40" height="15" fill="#00CED1" rx="3"/>
+                <rect x="35" y="25" width="3" height="20" fill="#FFFF00"/>
+                <rect x="48" y="25" width="3" height="20" fill="#FFFF00"/>
+                <rect x="61" y="25" width="3" height="20" fill="#FFFF00"/>
+                <ellipse cx="36.5" cy="23" rx="2" ry="4" fill="#FF4500"/>
+                <ellipse cx="49.5" cy="23" rx="2" ry="4" fill="#FF4500"/>
+                <ellipse cx="62.5" cy="23" rx="2" ry="4" fill="#FF4500"/>
+                <circle cx="40" cy="57" r="3" fill="#FF69B4"/>
+                <circle cx="55" cy="57" r="3" fill="#FF69B4"/>
+                <circle cx="45" cy="47" r="2" fill="#FFD700"/>
+                <circle cx="60" cy="47" r="2" fill="#FFD700"/>
+            </svg>
+
+            <h1 class="title">Happy Birthday</h1>
+            <h2 class="name" id="nameDisplay"></h2>
+            <p class="message" id="messageDisplay"></p>
+            <input type="text" class="wish-input" id="wishInput" placeholder="Make a wish ✨">
+        </div>
+
+        <div class="interactive-elements">
+            <button class="interactive-btn" onclick="event.stopPropagation(); triggerConfetti()">🎊 Confetti</button>
+            <button class="interactive-btn" onclick="event.stopPropagation(); triggerHearts()">💖 Hearts</button>
+            <button class="interactive-btn" onclick="playChime()">🔔 Chime</button>
+        </div>
+    </div>
+
+    <div class="sparkle" style="top:15%; left:10%; animation-delay:0s;"></div>
+    <div class="sparkle" style="top:25%; right:15%; animation-delay:0.5s;"></div>
+    <div class="sparkle" style="bottom:30%; left:20%; animation-delay:1s;"></div>
+    <div class="sparkle" style="bottom:20%; right:10%; animation-delay:1.5s;"></div>
+</div>
+
+<audio id="chimeSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
+<script src="bday.js">defer</script>
+</body>
+</html>
