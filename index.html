@@ -1,68 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Magical Birthday — Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="bday.css">
-<title>Magical Birthday!</title>
 </head>
 <body>
-
-<div class="card">
-    <div class="confetti-container" id="confettiContainer"></div>
-    <div class="floating-hearts" id="heartsContainer"></div>
-
-    <div class="card-content">
-        <div>
-            <svg class="birthday-icon" width="80" height="80" viewBox="0 0 100 100">
-                <rect x="20" y="60" width="60" height="30" fill="#8B4513" rx="5"/>
-                <rect x="25" y="50" width="50" height="15" fill="#FFB6C1" rx="3"/>
-                <rect x="30" y="40" width="40" height="15" fill="#00CED1" rx="3"/>
-                <rect x="35" y="25" width="3" height="20" fill="#FFFF00"/>
-                <rect x="48" y="25" width="3" height="20" fill="#FFFF00"/>
-                <rect x="61" y="25" width="3" height="20" fill="#FFFF00"/>
-                <ellipse cx="36.5" cy="23" rx="2" ry="4" fill="#FF4500"/>
-                <ellipse cx="49.5" cy="23" rx="2" ry="4" fill="#FF4500"/>
-                <ellipse cx="62.5" cy="23" rx="2" ry="4" fill="#FF4500"/>
-                <circle cx="40" cy="57" r="3" fill="#FF69B4"/>
-                <circle cx="55" cy="57" r="3" fill="#FF69B4"/>
-                <circle cx="45" cy="47" r="2" fill="#FFD700"/>
-                <circle cx="60" cy="47" r="2" fill="#FFD700"/>
-            </svg>
-
-            <h1 class="title">Happy Birthday</h1>
-            <h2 class="name" id="nameDisplay"></h2>
-            <p class="message" id="messageDisplay"></p>
-
-            <div class="wish-container">
-                <input type="text" class="wish-input" id="wishInput" placeholder="Make a wish ✨">
-                <button class="wish-btn" id="wishBtn">🌠 Send Wish</button>
-            </div>
-        </div>
-
-        <div class="interactive-elements">
-            <button class="interactive-btn" onclick="event.stopPropagation(); triggerConfetti()">🎊 Confetti</button>
-            <button class="interactive-btn" onclick="event.stopPropagation(); triggerHearts()">💖 Hearts</button>
-            <button class="interactive-btn" onclick="playChime()">🔔 Chime</button>
-        </div>
-    </div>
-
-    <div class="sparkle" style="top:15%; left:10%; animation-delay:0s;"></div>
-    <div class="sparkle" style="top:25%; right:15%; animation-delay:0.5s;"></div>
-    <div class="sparkle" style="bottom:30%; left:20%; animation-delay:1s;"></div>
-    <div class="sparkle" style="bottom:20%; right:10%; animation-delay:1.5s;"></div>
+<div class="glow" aria-hidden></div>
+<main class="card" role="application" aria-label="Magical birthday card">
+<div class="particles" aria-hidden id="particles"></div>
+<canvas id="confettiCanvas"></canvas>
+<div class="hearts" id="hearts"></div>
+<div class="balloons" id="balloons"></div>
+<section class="content">
+<header class="header">
+<div class="icon" aria-hidden>
+<svg viewBox="0 0 100 100" width="90" height="90" aria-hidden>
+<rect x="14" y="56" width="72" height="24" rx="6" fill="#8B4513" opacity="0.95"></rect>
+<rect x="20" y="44" width="60" height="16" rx="5" fill="#FFB6C1"></rect>
+<rect x="26" y="32" width="48" height="14" rx="5" fill="#00CED1"></rect>
+<g fill="#FFFF66">
+<rect x="36" y="18" width="4" height="18" rx="2"></rect>
+<rect x="48" y="18" width="4" height="18" rx="2"></rect>
+<rect x="60" y="18" width="4" height="18" rx="2"></rect>
+</g>
+</svg>
 </div>
-
-<!-- 🎵 Heavenly Birthday Music -->
-<audio id="birthdayMusic" loop>
-  <source src="happy-birthday-to-you-background-music-for-the-holiday-piano-version-316324.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
+<div class="title">Happy Birthday</div>
+<div id="nameDisplay" class="name" aria-live="polite">Friend</div>
+<p id="messageDisplay" class="sub" aria-live="polite"></p>
+</header>
+<div class="controls">
+<div class="wish-row">
+<input id="wishInput" class="wish-input" type="text" inputmode="text" placeholder="Write a wish... ✨" aria-label="Type your wish">
+<button id="wishBtn" class="btn btn-primary" aria-label="Send wish">🌠 Send</button>
+</div>
+<div class="micro-actions" role="toolbar" aria-label="Actions">
+<button id="confettiBtn" class="action" title="Confetti">🎊</button>
+<button id="heartsBtn" class="action" title="Hearts">💖</button>
+<button id="chimeBtn" class="action" title="Chime">🔔</button>
+<button id="surpriseBtn" class="action" title="Surprise Mode">✨ Surprise</button>
+</div>
+</div>
+</section>
+<audio id="birthdayMusic" loop preload="auto">
+<source src="happy-birthday-to-you-background-music-for-the-holiday-piano-version-316324.mp3" type="audio/mpeg">
 </audio>
-
-<button id="playMusic" class="btn">🎶 Play Music</button>
-
-<audio id="chimeSound" src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3"></audio>
-
+<audio id="chimeSound" preload="auto">
+<source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+</audio>
+</main>
+<div class="modal-backdrop" id="introModal">
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+<h2 id="introTitle">Who are we celebrating today?</h2>
+<p>Enter a name and choose whether to play the birthday background music.</p>
+<div style="margin:10px 0">
+<input id="modalName" placeholder="Their name (e.g. Marie)" style="padding:10px 12px;border-radius:10px;border:1px solid #ddd;width:80%">
+</div>
+<div class="row" style="margin-bottom:12px">
+<label class="switch"><input id="modalMusic" type="checkbox" checked> <span style="margin-left:6px">Play music</span></label>
+</div>
+<div class="row">
+<button id="startBtn" class="btn btn-primary">Let's celebrate 🎉</button>
+</div>
+</div>
+</div>
 <script src="bday.js"></script>
 </body>
 </html>
